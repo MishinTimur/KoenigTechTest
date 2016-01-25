@@ -1,4 +1,6 @@
 ﻿using System;
+using DataAccessLayer.EF;
+using DataAccessLayer.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;

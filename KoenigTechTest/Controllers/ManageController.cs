@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using KoenigTechTest.Models;
+using KoenigTechTest.Models.ManageViewModels;
 
 namespace KoenigTechTest.Controllers
 {
