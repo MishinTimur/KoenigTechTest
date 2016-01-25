@@ -52,8 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\FluentConfig.cs" />
+    <Compile Include="EF\Initializer.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="EF\ApplicationDbContext.cs" />
+    <Compile Include="Entities\Currency.cs" />
+    <Compile Include="Entities\Exchanger.cs" />
+    <Compile Include="Entities\LocalIndex.cs" />
+    <Compile Include="Entities\PaymentSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

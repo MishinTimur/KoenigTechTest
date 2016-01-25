@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoenigTechTest", "KoenigTec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{EA8C50F2-DF0F-4E87-9442-C681E9EB8D3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{D69C90C2-0032-4AB0-B152-62B5F4898A3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EA8C50F2-DF0F-4E87-9442-C681E9EB8D3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA8C50F2-DF0F-4E87-9442-C681E9EB8D3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA8C50F2-DF0F-4E87-9442-C681E9EB8D3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D69C90C2-0032-4AB0-B152-62B5F4898A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D69C90C2-0032-4AB0-B152-62B5F4898A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D69C90C2-0032-4AB0-B152-62B5F4898A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D69C90C2-0032-4AB0-B152-62B5F4898A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

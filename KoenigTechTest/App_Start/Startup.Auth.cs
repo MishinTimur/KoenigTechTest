@@ -1,4 +1,5 @@
 ﻿using System;
+using BusinessLayer.Accounts;
 using DataAccessLayer.EF;
 using DataAccessLayer.Entities;
 using Microsoft.AspNet.Identity;

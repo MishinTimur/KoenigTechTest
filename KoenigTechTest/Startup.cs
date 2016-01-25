@@ -1,4 +1,6 @@
-﻿using Microsoft.Owin;
+﻿using System.Data.Entity;
+using DataAccessLayer.EF;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(KoenigTechTest.Startup))]
@@ -8,6 +10,7 @@ namespace KoenigTechTest
     {
         public void Configuration(IAppBuilder app)
         {
+
             ConfigureAuth(app);
         }
     }
