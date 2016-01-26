@@ -17,6 +17,15 @@ namespace DataAccessLayer.Entities
 
         public Exchanger Exchanger { get; set; }
 
-        public double Index { get; set; }
+        /// <summary>
+        /// Индекс на продажу
+        /// </summary>
+        public double GiveIndex { get; set; }
+
+
+        /// <summary>
+        /// Индекс на покупку
+        /// </summary>
+        public double GetIndex { get; set; }
     }
 }
