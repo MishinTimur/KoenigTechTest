@@ -19,7 +19,7 @@ namespace DataAccessLayer.EF
             base.Seed(context);
         }
 
-        // Курс на 27.01.2016 :)
+        // Курс на 27.01.2016 по гуглу :)
         private IList<Currency> GenerateCurrencies(ApplicationDbContext context)
         {
             var res = new List<Currency>
@@ -82,8 +82,9 @@ namespace DataAccessLayer.EF
         private void FillExchangerByLocalIndexes(Exchanger exchanger, IList<PaymentSystem> paymentSystems)
         {
             var rand = new Random(DateTime.Now.Millisecond);
-            double minBoundary = 0.95d;
-            double maxBoundary = 1.05d;
+            // Делаем совсем небольшой разброс по индексам. Иначе будет нереалистично
+            double minBoundary = 0.98d;
+            double maxBoundary = 1.02;
             foreach (var paymentSystem in paymentSystems)
             {
                 if (rand.Next()%2 == 0) continue;

@@ -22,3 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.dark {
+    background: #4a4a4a;
+	color: white;
+}
+
+h2 {
+    margin-bottom: 20pt;
+}
+
+thead {
+    font-weight: bold;
+}

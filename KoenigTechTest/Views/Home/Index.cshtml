@@ -1,50 +1,83 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<div ng-app="app" class="row">
+    <div class="col-md-4" ng-controller="paymentSystemsController">
+        <h2>Payment systems</h2>
+        <table class="table table-bordered" ng-hide="isBusy">
+            <thead>
+            <tr>
+                <td><h4 style="margin: 5px; text-align: center">Give</h4></td>
+                <td><h4 style="margin: 5px; text-align: center">Get</h4></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="sys in paymentSystems | orderBy : 'Name' ">
+                <td style="cursor: pointer; white-space: nowrap" ng-click="setGive(sys)" ng-class="{dark: sys.Id == giveId}">
+                    {{sys.Name + ' ' + sys.Currency}}
+                </td>
+                <td style="cursor: pointer; white-space: nowrap" ng-click="setGet(sys)" ng-class="{dark: sys.Id == getId}">
+                    {{sys.Name + ' ' + sys.Currency}}
+                </td>
+            </tr>
+            </tbody>
 
-<div ng-app="app">
-    <div class="col-md-4">
-        <div class="container" ng-controller="paymentSystemsController">
-            <table class="table table-striped table-bordered">
+        </table>
+
+        <h3 ng-show="isBusy" style="margin: 7pt;">Loading...</h3>
+    </div>
+    <div class="col-md-6 col-md-offset-1" ng-controller="exchangersController">
+        <h2>Exchangers</h2>
+        <hr />
+        <div class="row">
+            <div class="form-inline">
+                <div class="form-group"></div>
+                <div class="form-group"></div>
+                <div class="form-group"></div>
+            </div>
+            <div class="col-md-2">
+                <input type="radio" ng-model="calculateGive" ng-value="true"/> Give <br/>
+                <input type="radio" ng-model="calculateGive" ng-value="false"/> Get
+            </div>
+            <div class="col-md-6">
+                <input type="number" class="form-control" ng-model="amount" />
+            </div>
+            <div>
+                <input type="button" class="btn btn-default" ng-click="calculateExchangers()" value="Calculate" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <td><h4 style="margin: 5px;">Give</h4></td>
-                        <td><h4 style="margin: 5px;">Get</h4></td>
+                        <td>Exchanger</td>
+                        <td style="text-align: right;">Give</td>
+                        <td style="text-align: right;">Get</td>
                     </tr>
                 </thead>
-                <tr ng-repeat="sys in paymentSystems | orderBy : 'Name' ">
-                    <td><button ng-click="setGive(sys)">{{sys.Name + '(' + sys.Currency + ')'}}</button></td>
-                    <td><button ng-click="setGet(sys)">{{sys.Name + '(' + sys.Currency + ')'}}</button></td>
-                </tr>
+                <tbody>
+                    <tr ng-repeat="exchanger in exchangers | orderBy : 'Name'">
+                        <td>{{exchanger.Name}}</td>
+                        <td style="text-align: right;">
+                            <span style="font-weight: bold;">{{exchanger.Give.Cost | number:4}}</span>
+                            <br />
+                            <span> {{exchanger.Give.Curreny}}</span>
+                        </td>
+                        <td style="text-align: right;">
+                            <span style="font-weight: bold;">{{exchanger.Get.Cost | number:4}}</span>
+                            <br />
+                            <span>{{exchanger.Get.Curreny}}</span>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
+
     </div>
-    <div class="col-md-8">
-        <div class="container" ng-controller="exchangersController">
-            <table>
-                <thead>
-                    <tr><td>Exchanger</td><td>Give</td><td>Get</td></tr>
-                </thead>
-                <tr ng-repeat="exchanger in exchangers | orderBy : 'Name'">
-                    <td>{{exchanger.Name}}</td>
-                    <td>
-                        <span>
-                            {{exchanger.Give.Cost | currency : exchanger.Give.PaymentSystem.Currency}} <br />
-                            {{exchanger.Give.Curreny}}
-                        </span>
-                    </td>
-                    <td>
-                        <span>
-                            {{exchanger.Get.Cost | currency : exchanger.Get.PaymentSystem.Currency}} <br />
-                            {{exchanger.Get.Curreny}}
-                        </span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    
+
 </div>
+
 
 @section scripts
 {

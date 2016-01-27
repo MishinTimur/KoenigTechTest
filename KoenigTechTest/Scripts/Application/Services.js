@@ -10,7 +10,7 @@ mainModule.service("dataService",
 
 
             getExchangers: function (params, callback) {
-                $http({ method: 'GET', url: '/Home/Exchangers', params: {'give': params.give, 'get': params.get} }).success(callback);
+                $http({ method: 'GET', url: '/Home/Exchangers', params: params }).success(callback);
             }
 
         }

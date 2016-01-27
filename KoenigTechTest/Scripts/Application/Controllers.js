@@ -6,25 +6,28 @@ mainModule.controller("paymentSystemsController",
 
         var root = $scope.$root;
 
+        $scope.isBusy = false;
         $scope.paymentSystems = [];
 
         $scope.setGive = function(sys) {
-            $scope.Give = sys.Id;
+            $scope.giveId = sys.Id;
             sendCalculateExchangersMsg();
         }
 
         $scope.setGet = function(sys) {
-            $scope.Get = sys.Id;
+            $scope.getId = sys.Id;
             sendCalculateExchangersMsg();
         }
 
         var sendCalculateExchangersMsg = function() {
-            root.$broadcast('calculateExchangersMsg', { give: $scope.Give, get: $scope.Get });
+            root.$broadcast('paymentsChanged', { give: $scope.giveId, get: $scope.getId });
         }
 
-        var refresh = function() {
+        var refresh = function () {
+            $scope.isBusy = true;
             dataService.getPaymentSystems(function(data) {
                 $scope.paymentSystems = data;
+                $scope.isBusy = false;
             });
         }
 
@@ -37,12 +40,32 @@ mainModule.controller("exchangersController",
 
         $scope.exchangers = [];
 
-        $scope.$on('calculateExchangersMsg', function (event, arg) {
-            if (arg.give == undefined || arg.get == undefined)
+        $scope.amount = 1;
+        $scope.calculateGive = null;
+        $scope.payments = {};
+
+        $scope.$on('paymentsChanged', function (event, args) {
+            $scope.amount = 1;
+            $scope.calculateGive = null;
+            $scope.payments = { give: args.give, get: args.get };
+            $scope.calculateExchangers();
+
+        });
+
+        $scope.calculateExchangers = function () {
+            var get = $scope.payments.get;
+            var give = $scope.payments.give;
+            if (get == undefined || give == undefined)
                 return;
-            dataService.getExchangers(arg, function(data) {
+            dataService.getExchangers(
+            {
+                give: give,
+                get: get,
+                amount: $scope.amount,
+                calculateGive: $scope.calculateGive
+            }, function(data) {
                 $scope.exchangers = data;
             });
-        });
+        }
     }
 ]);
