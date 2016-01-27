@@ -1,5 +1,5 @@
 ﻿
-//PaymentSystemsController
+// ** paymentSystemsController **
 mainModule.controller("paymentSystemsController",
 [
     "$scope", "dataService", function ($scope, dataService) {
@@ -35,6 +35,7 @@ mainModule.controller("paymentSystemsController",
     }
 ]);
 
+// ** exchangersController **
 mainModule.controller("exchangersController",
 ["$scope", "dataService", function($scope, dataService) {
 
