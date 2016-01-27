@@ -90,8 +90,8 @@ namespace DataAccessLayer.EF
                 var localIndex = new LocalIndex()
                 {
                     Id = Guid.NewGuid(),
-                    GiveIndex = minBoundary + (rand.NextDouble()*(1d - minBoundary)),
-                    GetIndex = 1d + (rand.NextDouble()*(maxBoundary - 1d)),
+                    GiveIndex = 1d + (rand.NextDouble() * (maxBoundary - 1d)),
+                    GetIndex = minBoundary + (rand.NextDouble()*(1d - minBoundary)),
                     PaymentSys = paymentSystem,
                     Exchanger = exchanger
                 };
