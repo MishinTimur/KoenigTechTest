@@ -8,7 +8,7 @@ using DataAccessLayer.Entities;
 
 namespace DataAccessLayer.EF
 {
-    public class AppDbContextInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class AppDbContextInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {

@@ -28,35 +28,42 @@ namespace BusinessLayer.Services
         {
             var exchangers = await mDbContext.Exchangers.
                 Include(a => a.LocalIndexes.Select(b => b.PaymentSys.Currency)).
-                Where(a => a.LocalIndexes.Any(b => b.PaymentSys.Id == giveSystemId || b.PaymentSys.Id == getSystemId)).ToListAsync();
+                Where(a => new[] { giveSystemId, getSystemId }.All(sysId => a.LocalIndexes.Any(b => b.PaymentSys.Id == sysId))).ToListAsync();
             var result = new List<ExchangerInfo>();
-            foreach (var exchanger in exchangers)
+            try
             {
-                var giveLocalIndex = exchanger.LocalIndexes.First(a => a.PaymentSys.Id == giveSystemId);
-                var getLocalIndex = exchanger.LocalIndexes.First(a => a.PaymentSys.Id == getSystemId);
-
-                double giveIndexVal = giveLocalIndex.PaymentSys.Currency.GlobalIndex * giveLocalIndex.GiveIndex;
-                double getIndexVal = getLocalIndex.PaymentSys.Currency.GlobalIndex * getLocalIndex.GetIndex;
-
-                double giveCost = 0d, getCost = 0d;
-
-                CalculateCosts(amount, calculateGive, giveIndexVal, getIndexVal, out giveCost, out getCost);
-
-                result.Add(new ExchangerInfo()
+                foreach (var exchanger in exchangers)
                 {
-                    Id = exchanger.Id,
-                    Name = exchanger.Name,
-                    Get = new PaymentInfo()
+                    var giveLocalIndex = exchanger.LocalIndexes.First(a => a.PaymentSys.Id == giveSystemId);
+                    var getLocalIndex = exchanger.LocalIndexes.First(a => a.PaymentSys.Id == getSystemId);
+
+                    double giveIndexVal = giveLocalIndex.PaymentSys.Currency.GlobalIndex * giveLocalIndex.GetIndex;
+                    double getIndexVal = getLocalIndex.PaymentSys.Currency.GlobalIndex * getLocalIndex.GiveIndex;
+
+                    double giveCost = 0d, getCost = 0d;
+
+                    CalculateCosts(amount, calculateGive, giveIndexVal, getIndexVal, out giveCost, out getCost);
+
+                    result.Add(new ExchangerInfo()
                     {
-                        Cost = getCost,
-                        PaymentSystem = (PaymentSystemInfo)getLocalIndex.PaymentSys
-                    },
-                    Give = new PaymentInfo()
-                    {
-                        Cost = giveCost,
-                        PaymentSystem = (PaymentSystemInfo)giveLocalIndex.PaymentSys
-                    }
-                });
+                        Id = exchanger.Id,
+                        Name = exchanger.Name,
+                        Get = new PaymentInfo()
+                        {
+                            Cost = getCost,
+                            PaymentSystem = (PaymentSystemInfo)getLocalIndex.PaymentSys
+                        },
+                        Give = new PaymentInfo()
+                        {
+                            Cost = giveCost,
+                            PaymentSystem = (PaymentSystemInfo)giveLocalIndex.PaymentSys
+                        }
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
             return result;
         }

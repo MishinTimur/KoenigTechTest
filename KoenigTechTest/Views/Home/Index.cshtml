@@ -7,12 +7,9 @@
         <div class="container" ng-controller="paymentSystemsController">
             <table>
                 <thead>
-                    <tr>
-                        <td>Give</td>
-                        <td>Get</td>
-                    </tr>
+                    <tr><td>Give</td><td>Get</td></tr>
                 </thead>
-                <tr ng-repeat="sys in paymentSystems | orderBy : 'Currency' ">
+                <tr ng-repeat="sys in paymentSystems | orderBy : 'Name' ">
                     <td><button ng-click="setGive(sys)">{{sys.Name + '(' + sys.Currency + ')'}}</button></td>
                     <td><button ng-click="setGet(sys)">{{sys.Name + '(' + sys.Currency + ')'}}</button></td>
                 </tr>
@@ -21,7 +18,26 @@
     </div>
     <div class="col-md-8">
         <div class="container" ng-controller="exchangersController">
-
+            <table>
+                <thead>
+                    <tr><td>Exchanger</td><td>Give</td><td>Get</td></tr>
+                </thead>
+                <tr ng-repeat="exchanger in exchangers | orderBy : 'Name'">
+                    <td>{{exchanger.Name}}</td>
+                    <td>
+                        <span>
+                            {{exchanger.Give.Cost | currency : exchanger.Give.PaymentSystem.Currency}} <br />
+                            {{exchanger.Give.Curreny}}
+                        </span>
+                    </td>
+                    <td>
+                        <span>
+                            {{exchanger.Get.Cost | currency : exchanger.Get.PaymentSystem.Currency}} <br />
+                            {{exchanger.Get.Curreny}}
+                        </span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     
