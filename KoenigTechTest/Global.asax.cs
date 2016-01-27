@@ -14,7 +14,7 @@ namespace KoenigTechTest
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<ApplicationDbContext>(new Initializer());
+            Database.SetInitializer<ApplicationDbContext>(new AppDbContextInitializer());
 
 
             AreaRegistration.RegisterAllAreas();
