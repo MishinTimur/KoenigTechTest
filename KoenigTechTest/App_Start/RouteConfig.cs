@@ -12,14 +12,20 @@ namespace KoenigTechTest
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+//            routes.MapRoute(
+//                name: "account",
+//                url: "account",
+//                defaults: new {controller = "Home", action = "Index"});
+//            routes.MapRoute(
+//                name: "signup",
+//                url: "signup",
+//                defaults: new { controller = "Account", action = "Login" });
+//            routes.MapRoute("accountControllerRoute", "{action}", new {controller = "Account"}, new {action = "^Login$|^Register$|^LogOff$"});
+//            routes.MapRoute("Default", "account", new { controller = "Home", action="Index" });
             routes.MapRoute(
-                name: "Main",
-                url: "account",
-                defaults: new {controller = "Home", action = "Index"});
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                name: "common",
+                url: "{controller}/{action}",
+                defaults: new { controller = "Home", action = "Index" }
             );
         }
     }
